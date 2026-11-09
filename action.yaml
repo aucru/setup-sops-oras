@@ -1,0 +1,20 @@
+name: 'Setup SOPS and ORAS'
+description: 'Download SOPS and ORAS binaries for CI use'
+inputs:
+  sops-version:
+    description: 'SOPS version'
+    required: false
+    default: '3.9.0'
+  oras-version:
+    description: 'ORAS version'
+    required: false
+    default: '1.2.0'
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: python "${{ github.action_path }}/setup.py"
+      env:
+        SOPS_VERSION: ${{ inputs.sops-version }}
+        ORAS_VERSION: ${{ inputs.oras-version }}
